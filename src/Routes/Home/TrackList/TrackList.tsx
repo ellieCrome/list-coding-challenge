@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../App";
 
 import { Track } from "../../../Interfaces/Track";
-import { TrackCard } from "./TrackCard";
+import { TrackCard } from "../TrackCard";
 
 const getTopTracks = async (authToken: string): Promise<Array<Track>> => {
   const url = "https://api.spotify.com/v1/me/top/tracks";
