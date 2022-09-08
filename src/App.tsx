@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Login, Home } from "./Routes";
+
+export const AuthContext = createContext("");
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -21,7 +23,14 @@ const App = () => {
     <div>
       <Routes>
         {token ? (
-          <Route path="/" element={<Home authToken={token} />} />
+          <Route
+            path="/"
+            element={
+              <AuthContext.Provider value={token}>
+                <Home />
+              </AuthContext.Provider>
+            }
+          />
         ) : (
           <Route path="/" element={<Login />} />
         )}

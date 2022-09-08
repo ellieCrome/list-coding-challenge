@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { User } from "../../Interfaces/User";
-import { Track } from "../../Interfaces/Track";
-
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../App";
 import { Header } from "./Header";
 
 const getUser = async (authToken: string): Promise<User | null> => {
@@ -27,26 +25,18 @@ const getTopTracks = async (authToken: string): Promise<Array<Track>> => {
     headers: { Authorization: `Bearer ${authToken}` },
   };
   const response = await fetch(url, options);
-  console.log(response);
   const jsonResponse = await response.json();
 
-  console.log(jsonResponse);
   return jsonResponse.items;
 };
 
-export const Home = ({ authToken }: { authToken: string }) => {
-  const [user, setUser] = useState<User>();
+export const Home = () => {
   const [topTracks, setTopTracks] = useState<Array<Track>>();
+  const authToken = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getUser(authToken);
       const topTracks = await getTopTracks(authToken);
-
-      if (user) {
-        setUser(user);
-        console.log("user", user);
-      }
 
       if (topTracks) {
         setTopTracks(topTracks);
@@ -57,14 +47,11 @@ export const Home = ({ authToken }: { authToken: string }) => {
     fetchData();
   }, []);
 
-  if (!user || !topTracks) return null;
-
-  const { display_name: name, followers } = user;
-  const { total: followersCount } = followers;
+  if (!topTracks) return <div> Oopsie theres an error</div>;
 
   return (
     <>
-      <Header name={name} followersCount={followersCount} />
+      <Header />
 
       <h2>Your Top Tracks</h2>
 
