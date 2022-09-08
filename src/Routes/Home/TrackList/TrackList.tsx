@@ -38,11 +38,12 @@ export const TrackList = () => {
   return (
     <>
       {topTracks.map((track) => {
-        const { name, artists, explicit } = track;
+        const { name, artists, explicit, album } = track;
         const combinedArtists = artists.map((artist) => artist.name).join(", ");
 
         return (
           <TrackCard
+            imageUrl={album.images[0].url}
             name={name}
             artists={combinedArtists}
             explicit={explicit}
