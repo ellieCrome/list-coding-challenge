@@ -6,8 +6,7 @@ interface Artist {
 
 export interface Track {
   album: {
-    album_type: string;
-    total_tracks: number;
+    release_date: string;
   };
   artists: Array<Artist>;
   explicit: boolean;
