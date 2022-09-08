@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Use the Spotify API to return some data, maybe, an array of objects. You have to display the data in the UI.
+
 ## Available Scripts
 
 In the project directory, you can run:
