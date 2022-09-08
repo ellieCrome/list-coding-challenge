@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { User } from "../../Interfaces/User";
 import { Track } from "../../Interfaces/Track";
 
+import { Header } from "./Header";
+
 const getUser = async (authToken: string): Promise<User | null> => {
   if (!authToken) return Promise.resolve(null);
 
@@ -57,11 +59,12 @@ export const Home = ({ authToken }: { authToken: string }) => {
 
   if (!user || !topTracks) return null;
 
+  const { display_name: name, followers } = user;
+  const { total: followersCount } = followers;
+
   return (
     <>
-      <span>
-        Hi {user.display_name}, you have {user.followers.total} followers
-      </span>
+      <Header name={name} followersCount={followersCount} />
 
       <h2>Your Top Tracks</h2>
 
