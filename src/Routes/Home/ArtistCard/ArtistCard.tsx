@@ -1,18 +1,18 @@
 import React from "react";
 import { Card, CardContent, Typography, Chip } from "@mui/material";
 
-import "./trackCard.css";
+import "./artistCard.css";
 
-export const TrackCard = ({
+export const ArtistCard = ({
   imageUrl,
   name,
-  artists,
-  explicit,
+  genres,
+  popularity,
 }: {
   imageUrl: string;
   name: string;
-  artists: string;
-  explicit: boolean;
+  genres: string;
+  popularity: number;
 }) => (
   <Card variant="outlined">
     <CardContent className="card">
@@ -22,13 +22,16 @@ export const TrackCard = ({
         width="75px"
         height="75px"
       />
-      <div className="description" key={name}>
+      <div className="description">
         <Typography variant="h5" component="div">
           {name}
         </Typography>
-        {explicit ? <Chip className="chip" label="explict" /> : null}
-        <Typography>{artists}</Typography>
+        <Typography>{genres}</Typography>
       </div>
+
+      {popularity ? (
+        <Chip className="popularity" label={`Popularity:  ${popularity}%`} />
+      ) : null}
     </CardContent>
   </Card>
 );

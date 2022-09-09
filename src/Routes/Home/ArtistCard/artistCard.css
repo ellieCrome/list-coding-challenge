@@ -1,0 +1,18 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.description {
+    margin: 0 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.popularity {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}

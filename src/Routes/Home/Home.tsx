@@ -1,17 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Header } from "./Header";
 import { TrackList } from "./TrackList";
 
-import { Container } from "@mui/material";
+import { Container, Button } from "@mui/material";
 
-export const Home = () => (
-  <>
-    <Header />
+import "./home.css";
 
-    <Container maxWidth="lg">
-      <h2>Your Top Tracks</h2>
-      <TrackList />
-    </Container>
-  </>
-);
+export const Home = () => {
+  const [showArtists, setShowArtists] = useState(false);
+  const track = "tracks";
+  const artist = "artists";
+
+  return (
+    <>
+      <Header />
+
+      <Container maxWidth="lg">
+        <Button
+          className="button"
+          variant="outlined"
+          onClick={() => setShowArtists(!showArtists)}
+        >
+          What about your favourite {showArtists ? track : artist}?
+        </Button>
+
+        {showArtists ? (
+          <>
+            <h2>Your Top Artists</h2>
+            <TrackList type="artists" />
+          </>
+        ) : (
+          <>
+            <h2>Your Top Tracks</h2>
+            <TrackList type="tracks" />
+          </>
+        )}
+      </Container>
+    </>
+  );
+};
